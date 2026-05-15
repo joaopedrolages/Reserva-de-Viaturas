@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Viatura {
+  ID       Int       @id @default(autoincrement()) @map("ID")
+  Nome     String    @db.VarChar(100) @map("Nome")
+  reservas Reserva[]
+
+  @@map("viaturas")
+}
+
+model Reserva {
+  ID            Int       @id @default(autoincrement()) @map("ID")
+  IDViatura     Int       @map("IDViatura")
+  NomeCondutor  String    @db.VarChar(100) @map("NomeCondutor")
+  DataInicio    DateTime  @map("DataInicio")
+  DataFim       DateTime  @map("DataFim")
+  km            Int?
+  processo      String?   @db.Text
+  datafimreal   DateTime? @map("datafimreal")
+  viatura       Viatura   @relation(fields: [IDViatura], references: [ID], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([IDViatura])
+  @@index([IDViatura, DataInicio, DataFim])
+  @@map("reservas")
+}
