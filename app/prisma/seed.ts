@@ -3,6 +3,18 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  const configuredViaturas =
+    process.env.SEED_VIATURAS?.split(',')
+      .map((Nome) => Nome.trim())
+      .filter(Boolean) ?? [];
+
+  if (configuredViaturas.length === 0) {
+    console.log(
+      'Seed skipped: set SEED_VIATURAS with comma-separated vehicle names to insert data.',
+    );
+    return;
+  }
+
   const existingViaturas = await prisma.viatura.count();
 
   if (existingViaturas > 0) {
@@ -10,14 +22,7 @@ async function main() {
     return;
   }
 
-  const viaturas = [
-    'Ford Transit - 32-AB-10',
-    'Renault Kangoo - 88-CD-21',
-    'Peugeot Partner - 74-EF-45',
-    'Toyota Hilux - 19-GH-82',
-  ];
-
-  for (const Nome of viaturas) {
+  for (const Nome of configuredViaturas) {
     const exists = await prisma.viatura.findFirst({ where: { Nome } });
 
     if (!exists) {

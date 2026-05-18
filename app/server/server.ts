@@ -3,7 +3,7 @@ import { env } from './config/env';
 import { prisma } from './prisma/client';
 
 const server = app.listen(env.port, () => {
-  console.log(`API running on http://localhost:${env.port}`);
+  console.log(`Geo app running on http://localhost:${env.port}`);
 });
 
 const shutdown = async () => {

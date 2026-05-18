@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "private": true,
   "workspaces": [
-    "backend",
-    "frontend"
+    "app"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev --workspace backend\" \"npm run dev --workspace frontend\"",
-    "build": "npm run build --workspace backend && npm run build --workspace frontend",
-    "lint": "npm run lint --workspace backend && npm run lint --workspace frontend",
-    "format": "prettier --write ."
+    "dev": "npm run dev --workspace app",
+    "build": "npm run build --workspace app",
+    "start": "npm run start --workspace app",
+    "lint": "npm run lint --workspace app",
+    "format": "prettier --write .",
+    "migrate": "npm run migrate --workspace app",
+    "migrate:deploy": "npm run migrate:deploy --workspace app",
+    "seed": "npm run seed --workspace app"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
