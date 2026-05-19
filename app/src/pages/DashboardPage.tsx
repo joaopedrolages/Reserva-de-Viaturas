@@ -158,6 +158,12 @@ export function DashboardPage() {
               viaturasQuery.isFetching ||
               reservasQuery.isFetching
             }
+            onEventReserve={(reserva) => {
+              setCreateRange({
+                end: reserva.DataFim,
+                start: reserva.DataInicio,
+              });
+            }}
             onSelectRange={(start, end) => {
               if (viaturas.length > 0) {
                 setCreateRange({ start, end });

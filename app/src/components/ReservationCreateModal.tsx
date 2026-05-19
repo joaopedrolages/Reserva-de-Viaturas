@@ -22,6 +22,30 @@ interface ReservationCreateModalProps {
   viaturas: Viatura[];
 }
 
+function getAvailableDefaultViaturaId(
+  viaturas: Viatura[],
+  reservas: Reserva[],
+  range: ReservationCreateModalProps['range'],
+  defaultViaturaId?: number,
+) {
+  if (defaultViaturaId) {
+    return defaultViaturaId;
+  }
+
+  return (
+    viaturas.find(
+      (viatura) =>
+        !reservas.some(
+          (reserva) =>
+            reserva.IDViatura === viatura.ID &&
+            rangesOverlap(range.start, range.end, reserva.DataInicio, reserva.DataFim),
+        ),
+    )?.ID ??
+    viaturas[0]?.ID ??
+    ''
+  );
+}
+
 export function ReservationCreateModal({
   defaultViaturaId,
   onClose,
@@ -30,6 +54,12 @@ export function ReservationCreateModal({
   viaturas,
 }: ReservationCreateModalProps) {
   const selectedViatura = viaturas.find((viatura) => viatura.ID === defaultViaturaId);
+  const defaultFormViaturaId = getAvailableDefaultViaturaId(
+    viaturas,
+    reservas,
+    range,
+    defaultViaturaId,
+  );
   const createReserva = useCreateReserva();
   const {
     formState: { errors },
@@ -39,7 +69,7 @@ export function ReservationCreateModal({
   } = useForm<CreateReservaFormValues>({
     resolver: zodResolver(createReservaFormSchema),
     defaultValues: {
-      IDViatura: String(defaultViaturaId ?? viaturas[0]?.ID ?? ''),
+      IDViatura: String(defaultFormViaturaId),
       NomeCondutor: '',
       DataInicio: toDatetimeLocalValue(range.start),
       DataFim: toDatetimeLocalValue(range.end),
