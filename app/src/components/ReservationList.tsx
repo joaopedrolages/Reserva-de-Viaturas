@@ -31,7 +31,7 @@ export function ReservationList({
   if (reservas.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-slate-300 bg-white p-6 text-center">
-        <p className="font-medium text-slate-900">Sem reservas registadas</p>
+        <p className="font-medium text-slate-900">Sem reservas ativas/futuras</p>
         <p className="mt-1 text-sm text-slate-500">
           Selecione um período no calendário para criar a primeira reserva.
         </p>

@@ -55,6 +55,7 @@ export function DashboardPage() {
 
   const openReservations = reservas.filter((reserva) => !reserva.datafimreal).length;
   const completedReservations = reservas.length - openReservations;
+  const activeReservations = reservas.filter((reserva) => !reserva.datafimreal);
 
   const hasLoadError = viaturasQuery.isError || reservasQuery.isError;
 
@@ -63,10 +64,7 @@ export function DashboardPage() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-6 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">
-              Gestão de frota
-            </p>
-            <h1 className="mt-1 text-2xl font-bold text-slate-950 sm:text-3xl">
+            <h1 className="text-2xl font-bold text-slate-950 sm:text-3xl">
               Reservas de viaturas
             </h1>
           </div>
@@ -175,7 +173,7 @@ export function DashboardPage() {
             <ReservationList
               isLoading={reservasQuery.isLoading}
               onReturnClick={(reserva) => setReturnReserva(reserva)}
-              reservas={reservas}
+              reservas={activeReservations}
               viaturas={viaturas}
             />
           </div>
