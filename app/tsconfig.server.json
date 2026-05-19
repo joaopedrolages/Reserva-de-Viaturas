@@ -12,6 +12,6 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["server/**/*.ts", "prisma/seed.ts"],
+  "include": ["server/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

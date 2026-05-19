@@ -30,7 +30,6 @@ Isto permite publicar tudo num unico container Docker. A base de dados MySQL con
 |   |-- prisma
 |   |   |-- migrations
 |   |   |-- schema.prisma
-|   |   `-- seed.ts
 |   |-- server
 |   |   |-- controllers
 |   |   |-- middlewares
@@ -75,13 +74,7 @@ A app fica disponivel em:
 - API: http://localhost:4000/api
 - Health check: http://localhost:4000/api/health
 
-O container executa `prisma migrate deploy` no arranque. O seed nao corre automaticamente em Docker, para evitar inserir viaturas de teste em producao.
-
-Para correr o seed manualmente, defina antes `SEED_VIATURAS` com os nomes reais separados por virgula:
-
-```bash
-docker compose exec app npm run seed
-```
+O container executa `prisma migrate deploy` no arranque. Nao existe qualquer fonte de dados de teste: as viaturas e reservas apresentadas sao sempre lidas do MySQL configurado em `DATABASE_URL`.
 
 ## Arranque local
 
@@ -104,7 +97,6 @@ npm run dev
 npm run build
 npm run lint
 npm run migrate
-npm run seed
 ```
 
 Dentro de `app/`:

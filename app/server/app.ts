@@ -5,6 +5,7 @@ import path from 'node:path';
 import { env } from './config/env';
 import { errorMiddleware } from './middlewares/error.middleware';
 import { notFoundMiddleware } from './middlewares/not-found.middleware';
+import { prisma } from './prisma/client';
 import { apiRoutes } from './routes';
 
 const app = express();
@@ -21,8 +22,18 @@ app.use(
 );
 app.use(express.json());
 
-app.get('/api/health', (_req, res) => {
-  res.json({ mode: 'standalone', status: 'ok' });
+app.get('/api/health', async (_req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    res.json({ database: 'mysql', mode: 'standalone', status: 'ok' });
+  } catch {
+    res.status(503).json({
+      database: 'unreachable',
+      message: 'Nao foi possivel ligar ao MySQL.',
+      mode: 'standalone',
+      status: 'error',
+    });
+  }
 });
 
 app.use('/api', apiRoutes);
