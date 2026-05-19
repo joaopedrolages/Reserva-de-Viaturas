@@ -24,12 +24,21 @@ app.use(express.json());
 
 app.get('/api/health', async (_req, res) => {
   try {
-    await prisma.$queryRaw`SELECT 1`;
-    res.json({ database: 'mysql', mode: 'standalone', status: 'ok' });
+    const [viaturas, reservas] = await Promise.all([
+      prisma.viatura.count(),
+      prisma.reserva.count(),
+    ]);
+
+    res.json({
+      database: 'mysql',
+      mode: 'standalone',
+      status: 'ok',
+      tables: { reservas, viaturas },
+    });
   } catch {
     res.status(503).json({
       database: 'unreachable',
-      message: 'Nao foi possivel ligar ao MySQL.',
+      message: 'Nao foi possivel ler as tabelas MySQL esperadas.',
       mode: 'standalone',
       status: 'error',
     });

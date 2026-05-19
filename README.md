@@ -9,7 +9,7 @@ A aplicacao deixou de estar dividida em `frontend` e `backend`. Agora existe uma
 O mesmo processo Node/Express:
 
 - serve a API em `/api`
-- liga ao MySQL `geo` via Prisma
+- liga ao MySQL definido em `DATABASE_URL` via Prisma
 - serve o build React gerado pelo Vite
 
 Isto permite publicar tudo num unico container Docker. A base de dados MySQL continua externa ou noutro servidor/container.
@@ -53,7 +53,7 @@ Isto permite publicar tudo num unico container Docker. A base de dados MySQL con
 Crie um ficheiro `.env` na raiz a partir de `.env.example`:
 
 ```env
-DATABASE_URL="mysql://utilizador:password@IP_DA_MYSQL:3306/geo"
+DATABASE_URL="mysql://utilizador:password@HOST_MYSQL:3306/NOME_DA_BASE"
 PORT=4000
 CORS_ORIGIN="http://localhost:4000,http://localhost:5173,http://127.0.0.1:5173"
 APP_PORT=4000
@@ -74,7 +74,9 @@ A app fica disponivel em:
 - API: http://localhost:4000/api
 - Health check: http://localhost:4000/api/health
 
-O container executa `prisma migrate deploy` no arranque. Nao existe qualquer fonte de dados de teste: as viaturas e reservas apresentadas sao sempre lidas do MySQL configurado em `DATABASE_URL`.
+O container nao executa migrations automaticamente no arranque, para poder usar bases MySQL existentes e ja preenchidas. Nao existe qualquer fonte de dados de teste: as viaturas e reservas apresentadas sao sempre lidas do MySQL configurado em `DATABASE_URL`.
+
+A base MySQL configurada deve conter as tabelas `viaturas` e `reservas`. O endpoint `GET /api/health` valida a ligacao e confirma que essas tabelas conseguem ser lidas.
 
 ## Arranque local
 
@@ -107,6 +109,8 @@ npm run build
 npm run start
 npm run migrate:deploy
 ```
+
+Execute `npm run migrate:deploy` apenas quando quiser aplicar a migration Prisma numa base vazia ou numa base ja gerida pelo historico de migrations Prisma.
 
 ## API
 
