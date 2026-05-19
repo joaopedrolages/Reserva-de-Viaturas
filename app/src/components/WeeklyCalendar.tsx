@@ -1,4 +1,4 @@
-import type { DateSelectArg, EventClickArg, EventInput } from '@fullcalendar/core';
+import type { DateSelectArg, EventInput } from '@fullcalendar/core';
 import ptLocale from '@fullcalendar/core/locales/pt';
 import interactionPlugin from '@fullcalendar/interaction';
 import FullCalendar from '@fullcalendar/react';
@@ -9,7 +9,6 @@ import { getVehicleColorById } from '../utils/vehicleColors';
 
 interface WeeklyCalendarProps {
   isLoading: boolean;
-  onReservaClick: (reserva: Reserva) => void;
   onSelectRange: (start: string, end: string) => void;
   reservas: Reserva[];
   viaturas: Viatura[];
@@ -17,7 +16,6 @@ interface WeeklyCalendarProps {
 
 export function WeeklyCalendar({
   isLoading,
-  onReservaClick,
   onSelectRange,
   reservas,
   viaturas,
@@ -43,11 +41,6 @@ export function WeeklyCalendar({
 
   const handleSelect = (selection: DateSelectArg) => {
     onSelectRange(selection.startStr, selection.endStr);
-  };
-
-  const handleEventClick = (event: EventClickArg) => {
-    event.jsEvent.preventDefault();
-    onReservaClick(event.event.extendedProps.reserva as Reserva);
   };
 
   if (viaturas.length === 0) {
@@ -78,7 +71,6 @@ export function WeeklyCalendar({
           startTime: '08:00',
           endTime: '19:00',
         }}
-        eventClick={handleEventClick}
         eventTimeFormat={{
           hour: '2-digit',
           minute: '2-digit',

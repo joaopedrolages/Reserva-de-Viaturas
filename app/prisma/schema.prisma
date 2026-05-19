@@ -22,7 +22,9 @@ model Reserva {
   DataInicio    DateTime  @map("DataInicio")
   DataFim       DateTime  @map("DataFim")
   km            Int?
-  processo      String?   @db.Text
+  processo      String?   @db.VarChar(5)
+  proposta      Int?
+  descricao     String?   @db.VarChar(250)
   datafimreal   DateTime? @map("datafimreal")
   viatura       Viatura   @relation(fields: [IDViatura], references: [ID], onDelete: Cascade, onUpdate: Cascade)
 

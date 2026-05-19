@@ -140,7 +140,7 @@ export function DashboardPage() {
                 Cor = viatura
               </span>
               <span className="rounded-full bg-slate-100 px-3 py-1 font-semibold text-slate-700">
-                Tom claro = concluída
+                Apenas ativas/futuras
               </span>
             </div>
           </div>
@@ -158,13 +158,12 @@ export function DashboardPage() {
               viaturasQuery.isFetching ||
               reservasQuery.isFetching
             }
-            onReservaClick={(reserva) => setReturnReserva(reserva)}
             onSelectRange={(start, end) => {
               if (viaturas.length > 0) {
                 setCreateRange({ start, end });
               }
             }}
-            reservas={reservas}
+            reservas={activeReservations}
             viaturas={viaturas}
           />
 

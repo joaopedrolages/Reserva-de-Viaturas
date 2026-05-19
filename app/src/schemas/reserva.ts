@@ -32,18 +32,49 @@ export function createReturnFormSchema(dataInicio: string) {
           .min(0, 'Os km não podem ser negativos.')
           .optional(),
       ),
-      processo: z.string().optional(),
+      processo: z.preprocess(
+        (value) => (typeof value === 'string' && value.trim() === '' ? undefined : value),
+        z
+          .string()
+          .trim()
+          .regex(/^\d{1,5}$/, 'O processo deve ter apenas números e no máximo 5 dígitos.')
+          .optional(),
+      ),
+      proposta: z.preprocess(
+        (value) => {
+          if (value === '' || value === null || value === undefined) {
+            return undefined;
+          }
+
+          return Number(value);
+        },
+        z
+          .number({ invalid_type_error: 'Indique uma proposta numérica válida.' })
+          .int('A proposta deve ser um número inteiro.')
+          .min(0, 'A proposta não pode ser negativa.')
+          .max(999999, 'A proposta deve ter no máximo 6 dígitos.')
+          .optional(),
+      ),
+      descricao: z
+        .string()
+        .trim()
+        .max(250, 'A descrição deve ter no máximo 250 caracteres.')
+        .optional(),
     })
     .superRefine((data, ctx) => {
-      if (!data.datafimreal) {
-        return;
-      }
-
-      if (new Date(data.datafimreal) < new Date(dataInicio)) {
+      if (data.datafimreal && new Date(data.datafimreal) < new Date(dataInicio)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: ['datafimreal'],
           message: 'A data fim real não pode ser anterior à data início.',
+        });
+      }
+
+      if (!data.processo?.trim() && data.proposta === undefined && !data.descricao?.trim()) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['processo'],
+          message: 'Preencha pelo menos processo, proposta ou descrição.',
         });
       }
     });

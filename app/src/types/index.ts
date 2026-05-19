@@ -11,6 +11,8 @@ export interface Reserva {
   DataFim: string;
   km: number | null;
   processo: string | null;
+  proposta: number | null;
+  descricao: string | null;
   datafimreal: string | null;
   viatura?: Viatura;
 }
@@ -25,6 +27,8 @@ export interface CreateReservaPayload {
 export interface UpdateReservaPayload {
   km?: number | null;
   processo?: string | null;
+  proposta?: number | null;
+  descricao?: string | null;
   datafimreal?: string | null;
 }
 

@@ -63,6 +63,14 @@ export const reservasService = {
       updateData.processo = data.processo;
     }
 
+    if ('proposta' in data) {
+      updateData.proposta = data.proposta;
+    }
+
+    if ('descricao' in data) {
+      updateData.descricao = data.descricao;
+    }
+
     if ('datafimreal' in data) {
       updateData.datafimreal = data.datafimreal;
     }
