@@ -1,6 +1,6 @@
 # Reserva de Viaturas
 
-Aplicacao web para gestao e reserva de viaturas da empresa.
+Aplicacao web para gestao de reservas de viaturas da empresa.
 
 A aplicacao permite consultar viaturas existentes no MySQL, criar reservas, visualizar reservas num calendario semanal e registar posteriormente a devolucao efetiva da viatura com quilometros, processo, proposta e descricao.
 
