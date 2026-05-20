@@ -74,7 +74,7 @@ export function DashboardPage() {
               <strong className="text-lg text-slate-950">{viaturas.length}</strong>
             </div>
             <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3">
-              <span className="block text-xs text-amber-800">Ativas/futuras</span>
+              <span className="block text-xs text-amber-800">Reservadas</span>
               <strong className="text-lg text-amber-950">{openReservations}</strong>
             </div>
             <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3">
@@ -140,7 +140,7 @@ export function DashboardPage() {
                 Cor = viatura
               </span>
               <span className="rounded-full bg-slate-100 px-3 py-1 font-semibold text-slate-700">
-                Apenas ativas/futuras
+                Apenas reservadas
               </span>
             </div>
           </div>

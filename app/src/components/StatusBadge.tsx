@@ -21,7 +21,7 @@ export function StatusBadge({ reserva }: StatusBadgeProps) {
       ) : (
         <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
       )}
-      {isComplete ? 'Concluída' : 'Ativa/futura'}
+      {isComplete ? 'Concluída' : 'Reservada'}
     </span>
   );
 }

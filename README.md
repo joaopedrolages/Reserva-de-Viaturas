@@ -133,7 +133,7 @@ Execute `npm run migrate:deploy` apenas quando quiser aplicar a migration Prisma
 - A data fim real nao pode ser anterior a data inicio.
 - `km` aceita apenas inteiros iguais ou superiores a 0.
 - Dados de devolucao podem ser guardados parcialmente.
-- Reservas sem `datafimreal` aparecem como ativas/futuras.
+- Reservas sem `datafimreal` aparecem como reservadas.
 - Reservas com `datafimreal` aparecem como concluidas.
 
 ## Utilizacao
