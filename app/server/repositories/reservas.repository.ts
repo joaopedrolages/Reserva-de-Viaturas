@@ -26,6 +26,7 @@ export const reservasRepository = {
     const reserva = await prisma.reserva.findFirst({
       where: {
         IDViatura,
+        datafimreal: null,
         DataInicio: { lt: DataFim },
         DataFim: { gt: DataInicio },
       },

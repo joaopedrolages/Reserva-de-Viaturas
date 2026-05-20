@@ -38,6 +38,7 @@ function getAvailableDefaultViaturaId(
         !reservas.some(
           (reserva) =>
             reserva.IDViatura === viatura.ID &&
+            !reserva.datafimreal &&
             rangesOverlap(range.start, range.end, reserva.DataInicio, reserva.DataFim),
         ),
     )?.ID ??
@@ -81,6 +82,7 @@ export function ReservationCreateModal({
     const overlaps = reservas.some(
       (reserva) =>
         reserva.IDViatura === idViatura &&
+        !reserva.datafimreal &&
         rangesOverlap(values.DataInicio, values.DataFim, reserva.DataInicio, reserva.DataFim),
     );
 
