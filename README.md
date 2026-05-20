@@ -4,7 +4,7 @@ Aplicacao web para gestao de reservas de viaturas da empresa.
 
 A aplicacao permite consultar viaturas existentes no MySQL, criar reservas, visualizar reservas num calendario semanal e registar posteriormente a devolucao efetiva da viatura com quilometros, processo, proposta e descricao.
 
-## Estado Da Versao 1
+## Caracteristicas
 
 - Aplicacao autonoma num unico projeto `app/`.
 - O React e servido pelo mesmo processo Node/Express que disponibiliza a API.
