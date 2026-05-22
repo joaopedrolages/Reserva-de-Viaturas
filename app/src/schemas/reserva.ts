@@ -6,6 +6,11 @@ export const createReservaFormSchema = z
     NomeCondutor: z.string().trim().min(1, 'Indique o nome do condutor.').max(100),
     DataInicio: z.string().min(1, 'Indique a data de início.'),
     DataFim: z.string().min(1, 'Indique a data de fim.'),
+    descricao: z
+      .string()
+      .trim()
+      .max(250, 'A descrição deve ter no máximo 250 caracteres.')
+      .optional(),
   })
   .refine((data) => new Date(data.DataFim) > new Date(data.DataInicio), {
     message: 'A data fim deve ser posterior à data início.',

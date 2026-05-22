@@ -48,6 +48,7 @@ export function ReservationList({
               <th className="px-4 py-3">Período</th>
               <th className="px-4 py-3">Viatura</th>
               <th className="px-4 py-3">Condutor</th>
+              <th className="px-4 py-3">Descrição</th>
               <th className="px-4 py-3">Estado</th>
               <th className="px-4 py-3">Devolução</th>
               <th className="px-4 py-3 text-right">Ação</th>
@@ -74,6 +75,13 @@ export function ReservationList({
                     </span>
                   </td>
                   <td className="px-4 py-4 font-medium text-slate-900">{reserva.NomeCondutor}</td>
+                  <td className="max-w-xs px-4 py-4 text-slate-600">
+                    {reserva.descricao ? (
+                      <span className="line-clamp-2">{reserva.descricao}</span>
+                    ) : (
+                      <span className="text-slate-400">-</span>
+                    )}
+                  </td>
                   <td className="px-4 py-4">
                     <StatusBadge reserva={reserva} />
                   </td>

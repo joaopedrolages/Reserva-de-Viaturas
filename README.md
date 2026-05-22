@@ -297,7 +297,8 @@ Exemplo de criacao:
   "IDViatura": 1,
   "NomeCondutor": "Joao Silva",
   "DataInicio": "2026-05-20T09:00:00.000Z",
-  "DataFim": "2026-05-20T12:00:00.000Z"
+  "DataFim": "2026-05-20T12:00:00.000Z",
+  "descricao": "Deslocacao a cliente"
 }
 ```
 

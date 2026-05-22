@@ -22,6 +22,7 @@ export interface CreateReservaPayload {
   NomeCondutor: string;
   DataInicio: string;
   DataFim: string;
+  descricao?: string | null;
 }
 
 export interface UpdateReservaPayload {

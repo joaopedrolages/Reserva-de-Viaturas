@@ -74,6 +74,7 @@ export function ReservationCreateModal({
       NomeCondutor: '',
       DataInicio: toDatetimeLocalValue(range.start),
       DataFim: toDatetimeLocalValue(range.end),
+      descricao: '',
     },
   });
 
@@ -100,6 +101,7 @@ export function ReservationCreateModal({
         NomeCondutor: values.NomeCondutor.trim(),
         DataInicio: toIsoFromDatetimeLocal(values.DataInicio),
         DataFim: toIsoFromDatetimeLocal(values.DataFim),
+        descricao: values.descricao?.trim() ? values.descricao.trim() : null,
       });
       toast.success('Reserva criada com sucesso.');
       onClose();
@@ -176,6 +178,20 @@ export function ReservationCreateModal({
             />
             <FieldError message={errors.DataFim?.message} />
           </div>
+        </div>
+
+        <div>
+          <label className="text-sm font-medium text-slate-800" htmlFor="descricao">
+            Descrição
+          </label>
+          <textarea
+            className="mt-1 min-h-24 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-blue-700 focus:shadow-focus"
+            id="descricao"
+            maxLength={250}
+            placeholder="Descrição da reserva, até 250 caracteres"
+            {...register('descricao')}
+          />
+          <FieldError message={errors.descricao?.message} />
         </div>
 
         <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">

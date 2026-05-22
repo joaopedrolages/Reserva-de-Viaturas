@@ -58,6 +58,7 @@ export const createReservaSchema = z
     NomeCondutor: z.string().trim().min(1, 'O nome do condutor é obrigatório.').max(100),
     DataInicio: z.coerce.date(),
     DataFim: z.coerce.date(),
+    descricao: nullableLimitedText(250),
   })
   .strict()
   .refine((data) => data.DataFim > data.DataInicio, {
